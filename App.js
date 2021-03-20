@@ -18,7 +18,9 @@ import NewList from './src/Screens/NewList';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Container,Text,View,Icon } from 'native-base';
 
-
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import userReducer from './src/Redux/UserReducer';
 
 export default class App extends React.Component {
 
@@ -45,12 +47,14 @@ export default class App extends React.Component {
     this.setState({ isReady: true });
   }
 
+
   render() {
 
     if (!this.state.isReady) {
       return <AppLoading />;
     }
     return (
+     <Provider store={store}>
       <NavigationContainer>
          <Stack.Navigator initialRouteName={'Loading'}>
            <Stack.Screen name="NewList" component={NewList} options={{ title: "NewList" }} />
@@ -65,6 +69,7 @@ export default class App extends React.Component {
            }
          </Stack.Navigator>
       </NavigationContainer>
+    </Provider>
     );
   }
 }
@@ -72,13 +77,14 @@ export default class App extends React.Component {
 //Create Navigators
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const store = createStore(userReducer);
 
 function myTabNavigator() {
   return (
     <Tab.Navigator initialRouteName="Home" backBehavior='history' tabBarOptions={{labelStyle:{fontSize:18}}}>
-       <Tab.Screen name="Home" component={HomeScreen} options={{tabBarLabel:'Profile',tabBarIcon: ()=>(<Icon name="person-circle" style={{ fontSize:40}}/>)}}/>
-       <Tab.Screen name="Lists" component={ListsScreen} options={{tabBarLabel:'UserArea',tabBarIcon: ()=>(<Icon name="ios-home" style={{ fontSize:40}} />)}} />
-       <Tab.Screen name="About" component={AboutScreen} options={{tabBarLabel:'About',tabBarIcon: ()=>(<Icon name="ios-information-circle-sharp" style={{ fontSize:40}} />)}} />
+       <Tab.Screen name="Home" component={HomeScreen} options={{tabBarLabel:'Profile',tabBarIcon: ({focused})=>(<Icon name="person-circle" style={{ fontSize:40}}/>)}}/>
+       <Tab.Screen name="Lists" component={ListsScreen} options={{tabBarLabel:'UserArea',tabBarIcon: ({focused})=>(<Icon name="ios-home" style={{ fontSize:40}} />)}} />
+       <Tab.Screen name="About" component={AboutScreen} options={{tabBarLabel:'About',tabBarIcon: ({focused})=>(<Icon name="ios-information-circle-sharp" style={{ fontSize:40}} />)}} />
     </Tab.Navigator>
   );
 }

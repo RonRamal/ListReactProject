@@ -21,11 +21,12 @@ function LoginScreen ({navigation}) {
 
   const handlePress = () => {
     if (!email) {
-      Alert.alert('Email field is required.');
-    }
-
-    if (!password) {
-      Alert.alert('Password field is required.');
+      Alert.alert('Email field is required.'); 
+    }else
+    {
+      if (!password) {
+        Alert.alert('Password field is required.');
+      }
     }
 
     signIn(email, password);
@@ -50,16 +51,16 @@ function LoginScreen ({navigation}) {
     
            let user = await firebase.auth().currentUser;   
            
-           if(user != null){                 
-               CheckIfUserExists(user.email,user.displayName);                    
-            }        
+            if(user != null){                 
+                CheckIfUserExists(user.email,user.displayName);                    
+              }        
         }else{ 
-         type === 'cancel' 
+          type === 'cancel' 
         }
-      }catch({ message }) 
-      {
-         alert(`Facebook Login Error: ${message}`);
-      }
+        }catch({ message }) 
+        {
+          alert(`Facebook Login Error: ${message}`);
+        }
   };
 
 const btnFetch_PersonPicture = () => {

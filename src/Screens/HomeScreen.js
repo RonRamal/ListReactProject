@@ -2,14 +2,18 @@ import React, { useEffect, useState  } from 'react';
 import { Container,Content, Button,Text,Icon} from 'native-base';
 import { StyleSheet, ImageBackground,Alert,View,Image } from 'react-native';
 import { Col,Row, Grid } from 'react-native-easy-grid';
-
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 import {loggingOut} from '../../API/firebaseMethods';
 import {GetUserIDByEmail} from '../../UserMethods/UserAPI';
+import { useLinkProps } from '@react-navigation/native';
+
+import { updateUser } from '../Redux/UserActions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 
-function HomeScreen({ navigation })  {
+function HomeScreen({navigation,UserId,updateUser})  {
   
   let currentUserUID = firebase.auth().currentUser.uid;
 
@@ -82,6 +86,7 @@ function HomeScreen({ navigation })  {
       (result) => {
         console.log("fetch GetUserIDByEmail= ", result);
         setUserID(result);
+        updateUser(result);
       },
       (error) => {
         console.log("err post=", error);
@@ -106,6 +111,7 @@ function HomeScreen({ navigation })  {
               </Button>    
           </Row>   
           <Col styles={styles.UserDetails}> 
+              <Text style={styles.UserText}>UserID={UserId}</Text>
               <Text style={styles.UserText}>Welcome!, {firstName} {lastName}</Text>
               <Text style={styles.UserText}>{email}</Text>    
           </Col> 
@@ -123,6 +129,17 @@ function HomeScreen({ navigation })  {
   );
 }
 
+const mapStateToProps = (state) => {
+  const { UserId } = state
+  console.log("UserId==============>>"+UserId);
+  return { UserId }
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    updateUser,
+  }, dispatch)
+);
 const styles = StyleSheet.create({
   background: {
     width: '100%',
@@ -171,4 +188,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);

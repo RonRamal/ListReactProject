@@ -4,6 +4,10 @@ import { Container,Header, Content, Button, Input, Item, Text ,Icon } from 'nati
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import ListCard from '../Components/ListCard';
 
+import { updateUser } from '../Redux/UserActions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 class ListsScreen extends React.Component {
 
     constructor(props){
@@ -18,8 +22,9 @@ class ListsScreen extends React.Component {
   //DONE
   componentDidMount(){
 
-    const {UserID} = this.props.route.params;
-    this.CurrentUserID = UserID;
+    //const {UserID} = this.props.route.params;
+    //alert(UserID);
+    //this.CurrentUserID = UserID;
     this._unsubscribeFocus = this.props.navigation.addListener('focus',(payload)=>{
      this.GetListsFromServerByUserID();
     });
@@ -209,9 +214,18 @@ class ListsScreen extends React.Component {
    );
  }
 }
-export default ListsScreen
 
+const mapStateToProps = (state) => {
+  const { UserId } = state
+  console.log("UserId==============>>"+UserId);
+  return { UserId }
+};
 
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    updateUser,
+  }, dispatch)
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -250,3 +264,4 @@ const styles = StyleSheet.create({
     fontSize: 40,
    },
 });
+export default connect(mapStateToProps,mapDispatchToProps)(ListsScreen)
