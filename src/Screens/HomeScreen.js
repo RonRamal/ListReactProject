@@ -70,7 +70,7 @@ function HomeScreen({navigation,UserId,updateUser})  {
 
   const UpdateID=()=>{
 
-    fetch(`http://10.0.0.1:53382/api/ListUser?email=`+email, {
+    fetch(`http://10.0.0.9:53382/api/ListUser?email=`+email, {
       method: 'GET',
     // body: JSON.stringify(UserDetails),
       headers: new Headers({
@@ -86,7 +86,7 @@ function HomeScreen({navigation,UserId,updateUser})  {
       (result) => {
         console.log("fetch GetUserIDByEmail= ", result);
         setUserID(result);
-        updateUser(result);
+      //  updateUser(result);
       },
       (error) => {
         console.log("err post=", error);
@@ -111,7 +111,7 @@ function HomeScreen({navigation,UserId,updateUser})  {
               </Button>    
           </Row>   
           <Col styles={styles.UserDetails}> 
-              <Text style={styles.UserText}>UserID={UserId}</Text>
+              <Text style={styles.UserText}>UserID={userID}</Text>
               <Text style={styles.UserText}>Welcome!, {firstName} {lastName}</Text>
               <Text style={styles.UserText}>{email}</Text>    
           </Col> 

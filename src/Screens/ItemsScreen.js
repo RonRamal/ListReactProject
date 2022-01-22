@@ -49,10 +49,10 @@ class Category extends Component {
   //Done
   GetItemsListFromServer=(ListID)=> {
  
-    let FetchURL = `http://10.0.0.1:53382/api/Items`;
+    let FetchURL = `http://10.0.0.9:53382/api/Items`;
     let Parameter = ListID;
 
-    fetch(`http://10.0.0.1:53382/api/Items?id=`+Parameter, {
+    fetch(`http://10.0.0.9:53382/api/Items?id=`+Parameter, {
       method: 'GET',
       headers: new Headers({
       'Content-Type': 'application/json; charset=UTF-8',
@@ -97,7 +97,7 @@ class Category extends Component {
         ListID:this.CurrentList
       }
 
-      fetch(`http://10.0.0.1:53382/api/Items`, {
+      fetch(`http://10.0.0.9:53382/api/Items`, {
         method: 'POST',
         body: JSON.stringify(ItemToSend),
         headers: new Headers({
@@ -138,7 +138,7 @@ class Category extends Component {
       alert("Insert user email");
     }else{
 
-      fetch(`http://10.0.0.1:53382/api/ListUser?ListId=`+ListID, {
+      fetch(`http://10.0.0.9:53382/api/ListUser?ListId=`+ListID, {
         method: 'POST',
         body: JSON.stringify(UserEmail),
         headers: new Headers({
@@ -195,7 +195,7 @@ class Category extends Component {
         ListID:this.CurrentList
       }
 
-      fetch(`http://10.0.0.1:53382/api/Items?id=`+ItemID, {
+      fetch(`http://10.0.0.9:53382/api/Items?id=`+ItemID, {
         method: 'PUT',
         body: JSON.stringify(ItemToSend),
         headers: new Headers({
@@ -228,7 +228,7 @@ class Category extends Component {
    
     let itemIDToDelete = Item.ItemID;
 
-    fetch(`http://10.0.0.1:53382/api/Items?id=`+itemIDToDelete, {
+    fetch(`http://10.0.0.9:53382/api/Items?id=`+itemIDToDelete, {
       method: 'DELETE',
       //body: JSON.stringify(ItemToSend),
       headers: new Headers({

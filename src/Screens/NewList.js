@@ -57,7 +57,7 @@ class NewList extends Component {
   
   PostListInServer=(NewCreatedList)=>{
   
-    fetch(`http://10.0.0.1:53382/api/HubList`, {
+    fetch(`http://10.0.0.9:53382/api/HubList`, {
       method: 'POST',
       body: JSON.stringify(NewCreatedList),
       headers: new Headers({

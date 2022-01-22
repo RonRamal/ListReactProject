@@ -3,7 +3,7 @@
 
 export function GetUserIDByEmail(email){  
 
-  fetch(`http://10.0.0.1:53382/api/ListUser?email=`+email, {
+  fetch(`http://10.0.0.9:53382/api/ListUser?email=`+email, {
     method: 'GET',
    // body: JSON.stringify(UserDetails),
     headers: new Headers({
@@ -28,7 +28,7 @@ export function GetUserIDByEmail(email){
 export function CheckIfUserExists(email){  
 
  
-  fetch(`http://10.0.0.1:53382/api/User?email=`+email, {
+  fetch(`http://10.0.0.9:53382/api/User?email=`+email, {
     method: 'GET',
    // body: JSON.stringify(UserDetails),
     headers: new Headers({
@@ -58,7 +58,7 @@ export function PostUserToServerFacebook(displayName,email){
       UserName:displayName,
       UserEmail:email,       
   }
-  fetch(`http://10.0.0.1:53382/api/User`, {
+  fetch(`http://10.0.0.9:53382/api/User`, {
     method: 'POST',
     body: JSON.stringify(UserDetails),
     headers: new Headers({
@@ -86,7 +86,7 @@ export function PostUserToServer(email,lastName,firstName){
         UserName:name,
         UserEmail:email,       
     }
-    fetch(`http://10.0.0.1:53382/api/User`, {
+    fetch(`http://10.0.0.9:53382/api/User`, {
       method: 'POST',
       body: JSON.stringify(UserDetails),
       headers: new Headers({

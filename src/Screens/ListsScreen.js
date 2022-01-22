@@ -22,9 +22,9 @@ class ListsScreen extends React.Component {
   //DONE
   componentDidMount(){
 
-    //const {UserID} = this.props.route.params;
+    const {UserID} = this.props.route.params;
     //alert(UserID);
-    //this.CurrentUserID = UserID;
+    this.CurrentUserID = UserID;
     this._unsubscribeFocus = this.props.navigation.addListener('focus',(payload)=>{
      this.GetListsFromServerByUserID();
     });
@@ -40,7 +40,7 @@ class ListsScreen extends React.Component {
 
    let UserID=this.CurrentUserID;
 
-    fetch(`http://10.0.0.1:53382/api/HubList?UserID=`+UserID, {
+    fetch(`http://10.0.0.9:53382/api/HubList?UserID=`+UserID, {
         method: 'GET',
         headers: new Headers({
         'Content-Type': 'application/json; charset=UTF-8',
@@ -67,7 +67,7 @@ class ListsScreen extends React.Component {
 
  //Done but Useless
   GetListsFromServer = () => {
-    fetch(`http://10.0.0.1:53382/api/HubList`, {
+    fetch(`http://10.0.0.9:53382/api/HubList`, {
         method: 'GET',
         headers: new Headers({
         'Content-Type': 'application/json; charset=UTF-8',
@@ -98,7 +98,7 @@ class ListsScreen extends React.Component {
   let ListIDToBeRemoved = ClickedList.ListID;
   let UserID = this.CurrentUserID;
 
-   fetch(`http://10.0.0.1:53382/api/ListUser?UserID=`+UserID+`&ListID=`+ListIDToBeRemoved, {
+   fetch(`http://10.0.0.9:53382/api/ListUser?UserID=`+UserID+`&ListID=`+ListIDToBeRemoved, {
       method: 'DELETE',
       //body: JSON.stringify(ItemToSend),
       headers: new Headers({
@@ -145,7 +145,7 @@ class ListsScreen extends React.Component {
     let ListIDToDelete = ClickedList.ListID;
     let UserID = this.CurrentUserID;
 
-     fetch(`http://10.0.0.1:53382/api/HubList?UserID=`+UserID+`&ListID=`+ListIDToDelete, {
+     fetch(`http://10.0.0.9:53382/api/HubList?UserID=`+UserID+`&ListID=`+ListIDToDelete, {
         method: 'DELETE',
         //body: JSON.stringify(ItemToSend),
         headers: new Headers({

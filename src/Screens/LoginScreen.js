@@ -88,7 +88,7 @@ const btnFetch_PersonPicture = () => {
     
   const CheckIfUserExists = (email,displayName) => {  
 
-    fetch(`http://10.0.0.1:53382/api/User?email=`+email, {
+    fetch(`http://10.0.0.9:53382/api/User?email=`+email, {
       method: 'GET',
      // body: JSON.stringify(UserDetails),
       headers: new Headers({
@@ -141,10 +141,7 @@ const btnFetch_PersonPicture = () => {
             onChangeText={(password) => setPassword(password)}/>
         </View>
 
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
-
+       
         <TouchableOpacity style={styles.loginBtn} onPress={handlePress}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
